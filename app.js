@@ -1,4 +1,4 @@
-let question = document.querySelector(".question")
+
 
 
 let readyyes_btn = document.querySelector(".ready-yes-btn")
@@ -28,14 +28,23 @@ readyyes_btn.addEventListener("click", ()=>{
     createQuiz.classList.add("question-container")
     createQuiz.innerHTML = `
     <div class="question-container>
-            <p class="question">
-                1. What does CPU stands for?
+     
+   
+     <p id="question" style ="color: white;  font-size: 1.2rem;">
+                ${questionsArray[i]}
             </p>
             <input id="user-input" type="text">
             <button id="submit-btn">Submit</button>     
-            <p class="verdict">
+            <p id="verdict">
                 correct!!
-            </p>
+            </p> 
+    
+    
+    
+
+
+
+           
 
         </div>
     `
@@ -44,7 +53,11 @@ readyyes_btn.addEventListener("click", ()=>{
 
     let submitbtn = document.querySelector("#submit-btn")
     let userinput = document.querySelector("#user-input").value;
-    let verdict = document.querySelector(".verdict")
+    let verdict = document.querySelector("#verdict")
+    let question = document.querySelector("#question")
+
+   
+
     submitbtn.addEventListener("click", ()=>{
         if(userinput == '')
         {
@@ -52,6 +65,7 @@ readyyes_btn.addEventListener("click", ()=>{
             verdict.style.color = "orange"
         }
         else{
+
     
         }
       
