@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+nav{
+    background: rgb(255, 97, 229);
+
+}
+.logo{
+    color: #000;
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+.nav-content{
+    margin-left: 10em;
+    margin-right: 10em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-content ul{
+    display: flex;
+    gap: 4em;
+}
+.nav-content ul li{
+    list-style: none;
+
+}
+.nav-content ul li a{
+    color: #000;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: .3s linear;
+}
+.nav-content ul li a:hover{
+    color: #4f4f4f;
+}
+.score-container{
+    color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+body{
+    background: rgb(45, 45, 45);
+    
+}
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+.question{
+    color: antiquewhite;
+    font-size: 1.2rem;
+
+}
+input{
+    height: 2.7em;
+    width: 120%;
+    background: 0;
+    border: 1px solid wheat;
+    border-radius: 5px;
+    padding-left: 1em;
+    color: aliceblue;
+    font-size: 1.2rem;
+
+}
+button{
+    margin-top: 2em;
+    background: rgb(255, 97, 229);
+    padding: .6em 1.4em;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+    transition: .3s linear;
+}
+button:hover{
+    background: rgb(255, 37, 219);
+}
+.verdict{
+    color: rgb(0, 255, 13);
+    font-size: 1.5rem;
+}
