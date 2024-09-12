@@ -57,11 +57,7 @@ main{
     align-items: center;
     height: 40vh;
 }
-.question{
-    color: antiquewhite;
-    font-size: 1.2rem;
 
-}
 input{
     height: 2.7em;
     width: 120%;
@@ -103,4 +99,9 @@ button:hover{
 .ready-paragraph{
     color: #fff;
     font-size: 1.2rem;
+}
+#question{
+    color: antiquewhite;
+    font-size: 1.2rem;
+
 }
