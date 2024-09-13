@@ -1,4 +1,3 @@
-
 let readyyes_btn = document.querySelector(".ready-yes-btn")
 let ready = document.querySelector(".ready")
 
@@ -16,71 +15,71 @@ let answers = ["hypertext markup language",
                "musical instrument digital interface"
 ]
 
-
 readyyes_btn.addEventListener("click", ()=>{
     ready.style.display = "none"
-
-    for(i = 0; i<=questionsArray.length;i++)
-    {
-        let createQuiz = document.createElement("div")
-    createQuiz.classList.add("question-container")
-    createQuiz.innerHTML = `
-    <div class="question-container>
-     
-   
-     <p id="question" style ="color: white;  font-size: 1.2rem;">
-                ${questionsArray[i]}
-            </p>
-            <input id="user-input" type="text">
-            <button id="submit-btn">Submit</button>     
-            <p id="verdict">
-                correct!!
-            </p> 
-        </div>
-    `
-    document.querySelector(".query").appendChild(createQuiz)
-
-
-    let submitbtn = document.querySelector("#submit-btn")
-   
-    let verdict = document.querySelector("#verdict")
-    let question = document.querySelector("#question")
-
-submitbtn.addEventListener("click", ()=>{
-    let userinput = document.querySelector("#user-input").value
-    if(userinput != '')
-    {
-        let change_to_lower = userinput.toLowerCase();
-        console.log(change_to_lower)
-
-        if(change_to_lower === answers[i])
-        {
-            verdict.innerText = "correct"
-            verdict.style.color = "green"
-        }
-
-
-    }
-    else{
-          verdict.innerText = "Please type your answer"
-           verdict.style.color = "orange"
-
-
-    }
-  
-})
-    break;
-
-    }
-
-
+    generateQ()
     
 
-   
-
-   
-
 })
 
+let currentIndex = 0
 
-
+function generateQ(){
+    
+        let createQuiz = document.createElement("div")
+        createQuiz.classList.add("question-container")
+        createQuiz.innerHTML = `
+        <div class="question-container>
+         
+       
+         <p id="question" style ="color: white;  font-size: 1.2rem;">
+                    ${questionsArray[currentIndex]}
+                </p>
+                <input id="user-input" type="text">
+                <button id="submit-btn">Submit</button>     
+                <p id="verdict">
+                    
+                </p> 
+            </div>
+        `
+        document.querySelector(".query").innerHTML = ''; 
+        document.querySelector(".query").appendChild(createQuiz)
+    
+    
+        let submitbtn = document.querySelector("#submit-btn")
+       
+        let verdict = document.querySelector("#verdict")
+        let question = document.querySelector("#question")
+    
+    submitbtn.addEventListener("click", ()=>{
+        let userinput = document.querySelector("#user-input").value
+        if(userinput != '')
+        {
+            let change_to_lower = userinput.toLowerCase();
+            console.log(change_to_lower)
+    
+            if(change_to_lower === answers[currentIndex])
+            {
+                
+                verdict.innerText = "correct"
+                verdict.style.color = "green"
+                currentIndex++;
+                setTimeout(generateQ, 10000)
+                
+            }else{
+                verdict.innerText = "incorrect, try again"
+                    verdict.style.color = "red"
+            }
+    
+        }
+        else{
+              verdict.innerText = "Please type your answer"
+               verdict.style.color = "orange"
+    
+        }
+    })
+        
+        
+    
+        
+}
