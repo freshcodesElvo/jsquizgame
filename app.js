@@ -1,6 +1,4 @@
 
-
-
 let readyyes_btn = document.querySelector(".ready-yes-btn")
 let ready = document.querySelector(".ready")
 
@@ -19,12 +17,12 @@ let answers = ["hypertext markup language",
 ]
 
 
-
-
 readyyes_btn.addEventListener("click", ()=>{
     ready.style.display = "none"
 
-    let createQuiz = document.createElement("div")
+    for(i = 0; i<=questionsArray.length;i++)
+    {
+        let createQuiz = document.createElement("div")
     createQuiz.classList.add("question-container")
     createQuiz.innerHTML = `
     <div class="question-container>
@@ -38,38 +36,49 @@ readyyes_btn.addEventListener("click", ()=>{
             <p id="verdict">
                 correct!!
             </p> 
-    
-    
-    
-
-
-
-           
-
         </div>
     `
-    main.appendChild(createQuiz)
+    document.querySelector(".query").appendChild(createQuiz)
 
 
     let submitbtn = document.querySelector("#submit-btn")
-    let userinput = document.querySelector("#user-input").value;
+   
     let verdict = document.querySelector("#verdict")
     let question = document.querySelector("#question")
 
-   
+submitbtn.addEventListener("click", ()=>{
+    let userinput = document.querySelector("#user-input").value
+    if(userinput != '')
+    {
+        let change_to_lower = userinput.toLowerCase();
+        console.log(change_to_lower)
 
-    submitbtn.addEventListener("click", ()=>{
-        if(userinput == '')
+        if(change_to_lower === answers[i])
         {
-            verdict.innerText = "Please type your answer"
-            verdict.style.color = "orange"
+            verdict.innerText = "correct"
+            verdict.style.color = "green"
         }
-        else{
+
+
+    }
+    else{
+          verdict.innerText = "Please type your answer"
+           verdict.style.color = "orange"
+
+
+    }
+  
+})
+    break;
+
+    }
+
 
     
-        }
-      
-    })
+
+   
+
+   
 
 })
 
