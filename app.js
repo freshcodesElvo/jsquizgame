@@ -1,5 +1,8 @@
 let readyyes_btn = document.querySelector(".ready-yes-btn")
 let ready = document.querySelector(".ready")
+let score = 0;
+
+let scoreTag = document.querySelector(".score")
 
 let main = document.querySelector(".main")
 let questionsArray = ["What does HTML stands for?",
@@ -19,7 +22,6 @@ readyyes_btn.addEventListener("click", ()=>{
     ready.style.display = "none"
     generateQ()
     
-
 })
 
 let currentIndex = 0
@@ -30,8 +32,6 @@ function generateQ(){
         createQuiz.classList.add("question-container")
         createQuiz.innerHTML = `
         <div class="question-container>
-         
-       
          <p id="question" style ="color: white;  font-size: 1.2rem;">
                     ${questionsArray[currentIndex]}
                 </p>
@@ -50,36 +50,49 @@ function generateQ(){
        
         let verdict = document.querySelector("#verdict")
         let question = document.querySelector("#question")
+        let trials = 3;
     
     submitbtn.addEventListener("click", ()=>{
-        let userinput = document.querySelector("#user-input").value
-        if(userinput != '')
-        {
-            let change_to_lower = userinput.toLowerCase();
-            console.log(change_to_lower)
-    
-            if(change_to_lower === answers[currentIndex])
+       
+
+        while(trials>0){
+            let userinput = document.querySelector("#user-input").value
+            if(userinput != '')
             {
-                
-                verdict.innerText = "correct"
-                verdict.style.color = "green"
-                currentIndex++;
-                setTimeout(generateQ, 10000)
-                
-            }else{
-                verdict.innerText = "incorrect, try again"
+                let change_to_lower = userinput.toLowerCase();
+                console.log(change_to_lower)
+        
+                if(change_to_lower === answers[currentIndex])
+                {
+                    
+                    verdict.innerText = "correct"
+                    verdict.style.color = "green"
+                    currentIndex++;
+                    score++;
+                    scoreTag.innerText = `Score: ${score}`;
+    
+                    setTimeout(generateQ, 3000)
+                    
+                }else{
+                    verdict.innerText = "incorrect, try again"
                     verdict.style.color = "red"
+                    trials--;
+                    if(trials == 0)
+                    {
+                        return;
+                    }
+                }
+        
             }
-    
+            else{
+                  verdict.innerText = "Please type your answer"
+                   verdict.style.color = "orange"
+        
+            }
+            
         }
-        else{
-              verdict.innerText = "Please type your answer"
-               verdict.style.color = "orange"
-    
-        }
+
+     
     })
-        
-        
-    
         
 }
