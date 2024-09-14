@@ -1,7 +1,6 @@
 let readyyes_btn = document.querySelector(".ready-yes-btn")
 let ready = document.querySelector(".ready")
 let score = 0;
-
 let scoreTag = document.querySelector(".score")
 
 let main = document.querySelector(".main")
@@ -21,15 +20,13 @@ let trials = 3;
 
 readyyes_btn.addEventListener("click", ()=>{
     ready.style.display = "none"
-    generateQ()
-    
+    generateQ();
 })
 
 let currentIndex = 0
 
 function generateQ(){
-   
-    
+
         let createQuiz = document.createElement("div")
         createQuiz.classList.add("question-container")
         createQuiz.innerHTML = `
@@ -42,20 +39,20 @@ function generateQ(){
                 <p id="verdict">
                     
                 </p> 
+                <p id="remaining-trials">
+                    
+                </p> 
             </div>
         `
         document.querySelector(".query").innerHTML = ''; 
         document.querySelector(".query").appendChild(createQuiz)
-    
-    
+        
         let submitbtn = document.querySelector("#submit-btn")
         let verdict = document.querySelector("#verdict")
         let question = document.querySelector("#question")
+        let remaining_trials = document.querySelector("#remaining-trials")
     
         submitbtn.addEventListener("click", ()=>{
-        
-
-
         
             let userinput = document.querySelector("#user-input").value
             if(userinput != '')
@@ -64,25 +61,30 @@ function generateQ(){
                 //console.log(change_to_lower)
         
                 if(change_to_lower === answers[currentIndex])
-                {
-                    
-                    verdict.innerText = "correct"
+                {    
+                    verdict.innerText = "correct 😎😎😎"
                     verdict.style.color = "green"
+                    verdict.style.fontSize = "1.8rem"
+                    verdict.style.fontWeight = "bold"
                     currentIndex++;
                     score++;
                     scoreTag.innerText = `Score: ${score}`;
-                    setTimeout(generateQ, 3000)
+                    setTimeout(generateQ, 2000)
                     
                 }else{
-                    verdict.innerText = "incorrect, try again"
+                    verdict.innerText = "incorrect 😣😣😣 try again"
                     verdict.style.color = "red"
+                    verdict.style.fontSize = "1.8rem"
+                    verdict.style.fontWeight = "bold" 
                     trials--;
+                    remaining_trials.innerText = `${trials} tirals remaining`
                     console.log(trials)
                     if(trials === 0)
                     {
                         verdict.innerText = "No more trials left.";
                         verdict.style.color = "grey";
-                      
+                        verdict.style.fontSize = "1.8rem"
+                        verdict.style.fontWeight = "bold"     
                         submitbtn.disabled = true
 
                         setTimeout(()=>{
@@ -92,7 +94,6 @@ function generateQ(){
                         },3000)
                     }
                 }
-        
             }
             
             else{
@@ -102,6 +103,4 @@ function generateQ(){
             }
         
     })
-
-
 }
