@@ -17,6 +17,7 @@ let answers = ["hypertext markup language",
                "dennis richie",
                "musical instrument digital interface"
 ]
+let trials = 3;
 
 readyyes_btn.addEventListener("click", ()=>{
     ready.style.display = "none"
@@ -27,6 +28,7 @@ readyyes_btn.addEventListener("click", ()=>{
 let currentIndex = 0
 
 function generateQ(){
+   
     
         let createQuiz = document.createElement("div")
         createQuiz.classList.add("question-container")
@@ -47,20 +49,19 @@ function generateQ(){
     
     
         let submitbtn = document.querySelector("#submit-btn")
-       
         let verdict = document.querySelector("#verdict")
         let question = document.querySelector("#question")
-        let trials = 3;
     
-    submitbtn.addEventListener("click", ()=>{
-       
+        submitbtn.addEventListener("click", ()=>{
+        
 
-        while(trials>0){
+
+        
             let userinput = document.querySelector("#user-input").value
             if(userinput != '')
             {
                 let change_to_lower = userinput.toLowerCase();
-                console.log(change_to_lower)
+                //console.log(change_to_lower)
         
                 if(change_to_lower === answers[currentIndex])
                 {
@@ -70,29 +71,37 @@ function generateQ(){
                     currentIndex++;
                     score++;
                     scoreTag.innerText = `Score: ${score}`;
-    
                     setTimeout(generateQ, 3000)
                     
                 }else{
                     verdict.innerText = "incorrect, try again"
                     verdict.style.color = "red"
                     trials--;
-                    if(trials == 0)
+                    console.log(trials)
+                    if(trials === 0)
                     {
-                        return;
+                        verdict.innerText = "No more trials left.";
+                        verdict.style.color = "grey";
+                      
+                        submitbtn.disabled = true
+
+                        setTimeout(()=>{
+                            currentIndex++
+                            trials =3
+                            generateQ();
+                        },3000)
                     }
                 }
         
             }
+            
             else{
                   verdict.innerText = "Please type your answer"
                    verdict.style.color = "orange"
         
             }
-            
-        }
-
-     
-    })
         
+    })
+
+
 }
