@@ -5,16 +5,16 @@ let scoreTag = document.querySelector(".score")
 
 let main = document.querySelector(".main")
 let questionsArray = ["What does HTML stands for?",
-                       "What does CPU stands for?",
-                       "What does GNU stands for",
-                       "Who created the C programming language?",
-                       "What does MIDI stands for in music and computers?"
+                       //"What does CPU stands for?",
+                       //"//What does GNU stands for",
+                       //"Who created the C programming language?",
+                       //"What does MIDI stands for in music and computers?"
 ]
 let answers = ["hypertext markup language",
-               "central processing language",
-               "gnu's not unix",
-               "dennis richie",
-               "musical instrument digital interface"
+               //"central processing unit",
+               //"gnu's not unix",
+               //"dennis richie",
+               //"musical instrument digital interface"
 ]
 let trials = 3;
 
@@ -25,19 +25,21 @@ readyyes_btn.addEventListener("click", ()=>{
 
 let currentIndex = 0
 
+let gameoverr = false;
+
 function generateQ(){
 
         let createQuiz = document.createElement("div")
         createQuiz.classList.add("question-container")
         createQuiz.innerHTML = `
-        <div class="question-container>
+        <div class="question-container">
          <p id="question" style ="color: white;  font-size: 1.2rem;">
                     ${questionsArray[currentIndex]}
                 </p>
                 <input id="user-input" type="text">
                 <button id="submit-btn">Submit</button>     
                 <p id="verdict">
-                    
+
                 </p> 
                 <p id="remaining-trials">
                     
@@ -70,6 +72,27 @@ function generateQ(){
                     score++;
                     scoreTag.innerText = `Score: ${score}`;
                     setTimeout(generateQ, 2000)
+
+                    if(currentIndex == questionsArray.length){
+                        let game_over = document.createElement("div")
+                        game_over.classList.add("game-over-body")
+                        game_over.innerHTML= `
+                           <div >
+                           <p style ="color: white;  font-size: 1.2rem;">
+                               Game over
+                           </p>
+                         </div>
+                        `
+                        document.querySelector(".question-container").style.display = "none";
+                        document.querySelector(".main").appendChild(game_over)
+                        gameoverr = true
+                        if(gameoverr)
+                        {
+                            
+                        }
+                        
+                    }
+                    
                     
                 }else{
                     verdict.innerText = "incorrect 😣😣😣 try again"
@@ -95,12 +118,10 @@ function generateQ(){
                     }
                 }
             }
-            
             else{
                   verdict.innerText = "Please type your answer"
                    verdict.style.color = "orange"
         
             }
-        
     })
 }
