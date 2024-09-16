@@ -47,7 +47,9 @@ nav{
     font-weight: bold;
 }
 body{
-    background: rgb(45, 45, 45);
+    background: #2d2d2d;
+    transition: .3s linear;
+  
     
 }
 main{
