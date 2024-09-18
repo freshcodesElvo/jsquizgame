@@ -13,15 +13,15 @@ let randomComplement;
 let main = document.querySelector(".main")
 let questionsArray = ["What does HTML stands for?",
                        "What does CPU stands for?",
-                       "What does GNU stands for",
-                       "Who created the C programming language?",
-                       "What does MIDI stands for in music and computers?"
+                    //    "What does GNU stands for",
+                    //    "Who created the C programming language?",
+                    //    "What does MIDI stands for in music and computers?"
 ]
 let answers = ["hypertext markup language",
                "central processing unit",
-               "gnu's not unix",
-               "    ",
-               "musical instrument digital interface"
+            //    "gnu's not unix",
+            //    "dennis richie",
+            //    "musical instrument digital interface"
 ]
 let trials = 3;
 
@@ -29,28 +29,49 @@ readyyes_btn.addEventListener("click", ()=>{
     ready.style.display = "none"
     generateQ();
 })
-
+let got_right_questions = []
+let got_wrongt_answers = []
 let currentIndex = 0
 let flashInterval;
 let gameoverr = false;
 
 function generateQ(){
     if(gameoverr == true){
+        let i;
+        let p
+
+        for ( i = 0; i < got_right_questions.length; i += 2) {
+            p += `<p style="font-size: 1.1rem; color:antiquewhite; display:flex; justify-content: flex-start; align-items: center; font-weight: 500; " >${got_right_questions[i]} &nbsp &nbsp <span style="font-size: 1.1rem; color: rgb(0, 255, 0);"> ${got_right_questions[i + 1]} &nbsp &nbsp</span> <ion-icon name="checkmark-outline"></ion-icon></p>`;
+        }
+        
         let game_over = document.createElement("div")
                         game_over.classList.add("game-over-body")
                         game_over.innerHTML= `
-                           <div >
-                           <p style ="color: white;  font-size: 1.2rem;">
-                               Game over
-                           </p>
-                         </div>
+                           <div>
+                                <h2>
+                                    Your performance
+                                </h2>
+
+                                    <div class="performance-questions">
+                                         ${p}
+                                         ${q}
+
+                                         <p>90%</p>
+                                    </div>
+                                    
+                                </div>
                         `
+                       
+
+                        let performance_questions = document.getElementById("#performance-questionsz")
+                       
                         document.querySelector(".question-container").style.display = "none";
-                        document.querySelector(".main").appendChild(game_over)
+                        document.querySelector(".query").appendChild(game_over)
+
         return;
     }
 
-        let createQuiz = document.createElement("div")
+        let createQuiz = document.createElement("div") 
         createQuiz.classList.add("question-container")
         createQuiz.innerHTML = `
         <div class="question-container">
@@ -90,13 +111,21 @@ function generateQ(){
                 if(change_to_lower === answers[currentIndex])
                 {    
                     verdict.innerText = `${compliments[randomComplement]} !!! 😎😎😎`
-                    console.log(randomComplement)
+                    //console.log(randomComplement)
                     verdict.style.color = "green"
                     verdict.style.fontSize = "1.8rem"
                     verdict.style.fontWeight = "bold"
                     currentIndex++;
                     score++;
                     scoreTag.innerText = `Score: ${score}`;
+
+                    //////correct question
+
+                    got_right_questions.push(questionsArray[currentIndex-1])
+                    //console.log(got_right_questions)
+                    got_right_questions.push(userinput)
+                    //console.log(got_right_answers)
+
                     flashColor_green()
                     setTimeout(generateQ, 2000)
 
@@ -114,7 +143,8 @@ function generateQ(){
                     flashColor_red()
                     trials--;
                     remaining_trials.innerText = `${trials} tirals remaining`
-                    console.log(trials)
+                    remaining_trials.style.color = 'white'
+                
                     if(trials === 0)
                     {
                         verdict.innerText = "No more trials left.";
@@ -122,6 +152,9 @@ function generateQ(){
                         verdict.style.fontSize = "1.8rem"
                         verdict.style.fontWeight = "bold"     
                         submitbtn.disabled = true
+
+                        got_wrongt_answers.push(questionsArray[currentIndex-1])
+                        got_wrongt_answers.push(userinput)
 
                         setTimeout(()=>{
                             currentIndex++
@@ -145,7 +178,6 @@ const maxFlashes = 10
 function flashColor_green()
 {
         document.body.style.backgroundColor = 'green'
-
         setTimeout(() =>{
             document.body.style.backgroundColor = '#2d2d2d';
         }, 500);

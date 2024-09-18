@@ -106,5 +106,19 @@ button:hover{
 #question{
     color: antiquewhite;
     font-size: 1.2rem;
+}
+h2{
+    color: antiquewhite;
+}
 
+#quizzzz span{
+    color: rgb(0, 255, 0);
+}
+ion-icon{
+    font-size: 2em;
+    color: rgb(0, 255, 0);
+}
+.inline {
+    display: inline-block;
+    margin-right: 10px; 
 }
