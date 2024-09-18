@@ -38,11 +38,19 @@ let gameoverr = false;
 function generateQ(){
     if(gameoverr == true){
         let i;
-        let p
+        let p = '';
 
         for ( i = 0; i < got_right_questions.length; i += 2) {
             p += `<p style="font-size: 1.1rem; color:antiquewhite; display:flex; justify-content: flex-start; align-items: center; font-weight: 500; " >${got_right_questions[i]} &nbsp &nbsp <span style="font-size: 1.1rem; color: rgb(0, 255, 0);"> ${got_right_questions[i + 1]} &nbsp &nbsp</span> <ion-icon name="checkmark-outline"></ion-icon></p>`;
         }
+        let j;
+        let q = '';
+
+        for ( j = 0; j < got_wrongt_answers.length; j += 2) {
+            q += `<p style="font-size: 1.1rem; color:antiquewhite; display:flex; justify-content: flex-start; align-items: center; font-weight: 500; " >${got_wrongt_answers[j]} &nbsp &nbsp <span style="font-size: 1.1rem; color: red;"> ${got_wrongt_answers[j + 1]} &nbsp &nbsp</span> <ion-icon style ="color: red" name="close-outline"></ion-icon></p>`;
+        }
+
+        
         
         let game_over = document.createElement("div")
                         game_over.classList.add("game-over-body")
@@ -53,21 +61,18 @@ function generateQ(){
                                 </h2>
 
                                     <div class="performance-questions">
+                                    <h2>Gotten right</h2>
                                          ${p}
+                                    <h2> Failed </h2>
                                          ${q}
-
                                          <p>90%</p>
                                     </div>
                                     
                                 </div>
                         `
-                       
-
                         let performance_questions = document.getElementById("#performance-questionsz")
-                       
                         document.querySelector(".question-container").style.display = "none";
                         document.querySelector(".query").appendChild(game_over)
-
         return;
     }
 
@@ -153,7 +158,7 @@ function generateQ(){
                         verdict.style.fontWeight = "bold"     
                         submitbtn.disabled = true
 
-                        got_wrongt_answers.push(questionsArray[currentIndex-1])
+                        got_wrongt_answers.push(questionsArray[currentIndex])
                         got_wrongt_answers.push(userinput)
 
                         setTimeout(()=>{

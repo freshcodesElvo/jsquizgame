@@ -121,4 +121,5 @@ ion-icon{
 .inline {
     display: inline-block;
     margin-right: 10px; 
+    color: red;
 }
