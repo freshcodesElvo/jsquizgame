@@ -13,15 +13,15 @@ let randomComplement;
 let main = document.querySelector(".main")
 let questionsArray = ["What does HTML stands for?",
                        "What does CPU stands for?",
-                       "What does GNU stands for",
-                       "Who created the C programming language?",
-                       "What does MIDI stands for in music and computers?"
+                    //    "What does GNU stands for",
+                    //    "Who created the C programming language?",
+                    //    "What does MIDI stands for in music and computers?"
 ]
 let answers = ["hypertext markup language",
                "central processing unit",
-               "gnu's not unix",
-               "dennis richie",
-               "musical instrument digital interface"
+            //    "gnu's not unix",
+            //    "dennis richie",
+            //    "musical instrument digital interface"
 ]
 let trials = 3;
 
@@ -46,33 +46,56 @@ function generateQ(){
     if(gameoverr == true){
      
         for ( i = 0; i < got_right_questions.length; i += 2) {
-            p += `<p style="font-size: 1.1rem; color:antiquewhite; display:flex; justify-content: flex-start; align-items: center; font-weight: 500; " >${got_right_questions[i]} &nbsp &nbsp <span style="font-size: 1.1rem; color: rgb(0, 255, 0);"> ${got_right_questions[i + 1]} &nbsp &nbsp</span> <ion-icon name="checkmark-outline"></ion-icon></p>`;
+            p += `<p style="font-size: 1.1rem; color: rgb(162, 162, 162); display:flex; justify-content: flex-start; align-items: center; font-weight: 500; " >${got_right_questions[i]} &nbsp &nbsp <span style="font-size: 1.1rem; color: rgb(0, 255, 0);"> ${got_right_questions[i + 1]} &nbsp &nbsp</span> <ion-icon name="checkmark-outline"></ion-icon></p>`;
+        }
+        let gottenRight;
+        
+        if(i>0){
+            gottenRight = `
+               <h2>Gotten right</h2>    
+               ${p}
+            `
+
+        }
+        else{
+            gottenRight = '';
         }
 
         for ( j = 0; j < got_wrongt_answers.length; j += 2) {
             q += `
             
-            <p style="font-size: 1.1rem; color:antiquewhite; display:flex; justify-content: flex-start; align-items: center; font-weight: 500; " >${got_wrongt_answers[j]} &nbsp &nbsp <span style="font-size: 1.1rem; color: red;"> ${got_wrongt_answers[j + 1]} &nbsp &nbsp</span> <ion-icon style ="color: red" name="close-outline"></ion-icon></p>`;
+            <p style="font-size: 1.1rem; color:rgb(162, 162, 162); display:flex; justify-content: flex-start; align-items: center; font-weight: 500; " >${got_wrongt_answers[j]} &nbsp &nbsp <span style="font-size: 1.1rem; color: red;"> ${got_wrongt_answers[j + 1]} &nbsp &nbsp</span> <ion-icon style ="color: red" name="close-outline"></ion-icon></p>`;
         }
 
         correct_no_of_questions = got_right_questions.length/2;
         total_no_of_questions = questionsArray.length
         percentage = correct_no_of_questions * 100 / total_no_of_questions
-        
+
+        let failedSection;
+        if(j>0){
+            failedSection=`
+            <h2>Failed</h2>
+            ${q}
+            
+            `;
+        }
+        else{
+            failedSection = ''
+        }
+
 
         let game_over = document.createElement("div")
                         game_over.classList.add("game-over-body")
                         game_over.innerHTML= `
-                           <div style="margin-top: 10em;">
+                           <div style="margin-top: 6em;">
                                 <h2>
                                     Your performance
                                 </h2>
 
                                     <div class="performance-questions">
-                                    <h2>Gotten right</h2>
-                                         ${p}
-                                    <h2> Failed </h2>
-                                         ${q}
+                                    
+                                         ${gottenRight}
+                                         ${failedSection}
                                          <p style="font-size: 1.3rem; color: white";> Overall performance</p>
                                          <p id="per" style="font-size: 1.1rem; color:antiquewhite;">${percentage}%</p>
                                     </div>
@@ -84,7 +107,6 @@ function generateQ(){
                         document.querySelector(".query").appendChild(game_over)
         return;
     }
-
         let createQuiz = document.createElement("div") 
         createQuiz.classList.add("question-container")
         createQuiz.innerHTML = `
@@ -114,8 +136,6 @@ function generateQ(){
             let userinput = document.querySelector("#user-input").value
             if(userinput != '')
             {
-
-             
                 let change_to_lower = userinput.toLowerCase();
                 //console.log(change_to_lower)
                 randomComplement = Math.floor(Math.random()*compliments.length)
