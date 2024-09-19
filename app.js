@@ -13,15 +13,15 @@ let randomComplement;
 let main = document.querySelector(".main")
 let questionsArray = ["What does HTML stands for?",
                        "What does CPU stands for?",
-                    //    "What does GNU stands for",
-                    //    "Who created the C programming language?",
-                    //    "What does MIDI stands for in music and computers?"
+                       "What does GNU stands for",
+                       "Who created the C programming language?",
+                       "What does MIDI stands for in music and computers?"
 ]
 let answers = ["hypertext markup language",
                "central processing unit",
-            //    "gnu's not unix",
-            //    "dennis richie",
-            //    "musical instrument digital interface"
+               "gnu's not unix",
+               "dennis richie",
+               "musical instrument digital interface"
 ]
 let trials = 3;
 
@@ -52,7 +52,7 @@ function generateQ(){
         
         if(i>0){
             gottenRight = `
-               <h2>Gotten right</h2>    
+               <h2 style ="color: rgb(207, 207, 207); font-size: 1rem">Gotten right</h2>    
                ${p}
             `
 
@@ -70,11 +70,31 @@ function generateQ(){
         correct_no_of_questions = got_right_questions.length/2;
         total_no_of_questions = questionsArray.length
         percentage = correct_no_of_questions * 100 / total_no_of_questions
+        let perr;
+
+        if(percentage>50){
+            perr = `
+            <p style = "color: green; font-size: 1.2rem">${percentage}%</p>
+
+            `
+        }
+        else if(percentage<50){
+            perr = `
+            <p style = "color: orange;">${percentage}%</p>
+
+            `
+        }
+        else if(percentage<10){
+            perr = `
+            <p style = "color: red;">${percentage}%</p>
+
+            `
+        }
 
         let failedSection;
         if(j>0){
             failedSection=`
-            <h2>Failed</h2>
+            <h2 style = "color: rgb(207, 207, 207); font-size: 1rem">Failed</h2>
             ${q}
             
             `;
@@ -82,7 +102,6 @@ function generateQ(){
         else{
             failedSection = ''
         }
-
 
         let game_over = document.createElement("div")
                         game_over.classList.add("game-over-body")
@@ -96,8 +115,8 @@ function generateQ(){
                                     
                                          ${gottenRight}
                                          ${failedSection}
-                                         <p style="font-size: 1.3rem; color: white";> Overall performance</p>
-                                         <p id="per" style="font-size: 1.1rem; color:antiquewhite;">${percentage}%</p>
+                                         <p style ="color: rgb(207, 207, 207); font-size: 1.1rem; font-weight: bold;"> Overall performance</p>
+                                         <p id="per" >${perr}</p>
                                     </div>
                                     
                                 </div>
